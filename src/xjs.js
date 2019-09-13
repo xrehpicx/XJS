@@ -83,6 +83,13 @@ class xjs {
         this.domnod.addEventListener('mouseover', () => fun(this));
         return this;
     }
+    toggle() {
+        console.log(this.domnod.style.display);
+        this.domnod.style.display = this.domnod.style.display === 'none' ? 'block' : 'none';
+    }
+    style(prop, val) {
+        return !prop || !val ? this.domnod.style : (this.domnod.style[prop] = val);
+    }
 
 }
 function fullScreen(ele) {
