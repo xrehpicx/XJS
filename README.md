@@ -1,7 +1,7 @@
 # XJS
 JavaScript framework for simpler syntax
 
-embed: `<script src="https://cdn.jsdelivr.net/gh/xrehpicx/xjs@v1.1/src/xjs.js"></script>`
+embed: `<script src="https://cdn.jsdelivr.net/gh/xrehpicx/xjs@v1.2/src/xjs.js"></script>`
 
 ##### currently can help in:
   * Easier DOM event handling
