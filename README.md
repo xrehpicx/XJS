@@ -5,7 +5,9 @@ embed: `<script src="https://cdn.jsdelivr.net/gh/xrehpicx/xjs@v1.2/src/xjs.js"><
 
 ##### currently can help in:
   * Easier DOM event handling
+  * Style Changing
   * Dynamic Script Handling without type='module'
+
 
 ## DOM Event Handling
 
@@ -101,6 +103,36 @@ embed: `<script src="https://cdn.jsdelivr.net/gh/xrehpicx/xjs@v1.2/src/xjs.js"><
   Example:
   ```javascript
   x('#video').click(obj => obj.fullScreen());
+  ```
+  
+## Style
+  
+  * .style()
+  Can change CSS property
+  
+  to change property: `xjsobj.style(property , new_value)`
+  ```javascript
+  x('#video').click(ele => ele.style('opacity','.6'));
+  ```
+  to get CSS Style Declaration Object: `xjsobj.style()`
+  
+  
+  * .toggle()
+  Can toggle Display none to visible and can also toggle any Property between the default and new value
+  Syntax:
+  to toggle display like jQuery:
+  ```javascript
+  x('#box').click(ele => ele.toggle());
+  //or
+  x('#box').toggle();
+  ```
+  to toggle a custom property:
+  ```javascript
+  x('#box').click(ele => ele.toggle('color','red'));//this will toggle between red and the css defined color everytime u click on it
+  
+  //or
+  
+  x('#box').toggle('color','red');
   ```
   
 
