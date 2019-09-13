@@ -83,9 +83,23 @@ class xjs {
         this.domnod.addEventListener('mouseover', () => fun(this));
         return this;
     }
-    toggle() {
-        console.log(this.domnod.style.display);
-        this.domnod.style.display = this.domnod.style.display === 'none' ? 'block' : 'none';
+    toggle(prop='display', val='none') {
+        let styleobj = this.domnod.style;
+        let currentval = {};
+        if (prop !== undefined || prop !== 'reset' && val !== undefined) {
+            if (this.oldVal === undefined) {
+                currentval[prop] = styleobj[prop];
+                this.oldVal = currentval[prop];
+                this.newVal = val;
+                styleobj[prop] = val;
+            } else {
+                let temp;
+                styleobj[prop] = this.oldVal;
+                temp = this.oldVal;
+                this.oldVal = this.newVal;
+                this.newVal = temp;
+            }
+        }
     }
     style(prop, val) {
         return !prop || !val ? this.domnod.style : (this.domnod.style[prop] = val);
