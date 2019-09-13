@@ -45,7 +45,7 @@ class xjs {
     branch(e, re = 'c') {
         let element = document.createElement(e);
         this.domnod.appendChild(element);
-        let exjs = $(element, false);
+        let exjs = x(element, false);
         if (re[0] === 'c') {
             return exjs;
         } else if (re[0] === 'p') {
