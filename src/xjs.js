@@ -1,4 +1,3 @@
-
 class DS {
     getScript(scriptProp) {
         var script = document.createElement("script");
@@ -26,7 +25,6 @@ class DS {
 }
 
 class xjs {
-    xjs = true;
     constructor(selector) {
         if (typeof (selector) === 'string') {
             this.domnod = document.querySelector(selector);
@@ -63,6 +61,7 @@ class xjs {
             this.domnod.msRequestFullscreen();
         return this;
     }
+
     listen(...events) {
         let eventtype = typeof (events[0]);
         if (eventtype === 'string') {
@@ -86,6 +85,22 @@ class xjs {
     }
 
 }
+function fullScreen(ele) {
+    let element;
+    if (ele.xjs)
+        element = ele.get();
+    else
+        element = ele;
+    if (element.requestFullscreen)
+        element.requestFullscreen();
+    else if (element.mozRequestFullScreen)
+        element.mozRequestFullScreen();
+    else if (element.webkitRequestFullscreen)
+        element.webkitRequestFullscreen();
+    else if (element.msRequestFullscreen)
+        element.msRequestFullscreen();
+}
+
 function locate(element) {
     let parsedElement;
     if (element.xjs)
@@ -103,6 +118,7 @@ function locate(element) {
 }
 function x(selector, orphan = true) {
     let xjsobj = new xjs(selector);
+    xjsobj.xjs = true;
     return xjsobj;
 }
 

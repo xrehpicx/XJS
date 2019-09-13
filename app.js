@@ -1,5 +1,5 @@
 x('#box1').click((obj) => {
-    console.log(obj)
+    fullScreen(obj,true);
 }).hover(() => {
     console.log('hovered')
 });
