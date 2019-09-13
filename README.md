@@ -99,7 +99,7 @@ embed: `<script src="https://cdn.jsdelivr.net/gh/xrehpicx/xjs@v1.1/src/xjs.js"><
   ```
   
   Example:
-    ```javascript
+  ```javascript
   x('#video').click(obj => obj.fullScreen());
   ```
   
