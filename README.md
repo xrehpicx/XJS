@@ -1,7 +1,7 @@
 # XJS
 JavaScript framework for simpler syntax
 
-embed: `<script src="https://cdn.jsdelivr.net/gh/xrehpicx/XJS@v1/scr/xjs.js"></script>`
+embed: `<script src="https://cdn.jsdelivr.net/gh/xrehpicx/xjs@v1.1/src/xjs.js"></script>`
 
 ##### currently can help in:
   * Easier DOM event handling
@@ -99,7 +99,7 @@ embed: `<script src="https://cdn.jsdelivr.net/gh/xrehpicx/XJS@v1/scr/xjs.js"></s
   ```
   
   Example:
-    ```javascript
+  ```javascript
   x('#video').click(obj => obj.fullScreen());
   ```
   
