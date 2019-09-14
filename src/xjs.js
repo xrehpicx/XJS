@@ -1,40 +1,72 @@
+var version = 1.5;
+//XJS version Do Not Change This
 class DS {
-    getScript(scriptProp) {
-        var script = document.createElement("script");
-        script.src = scriptProp['src'];
-        if (scriptProp['integrity'] !== undefined)
-            script.integrity = scriptProp['integrity'];
-        if (scriptProp['crossorigin'] !== undefined)
-            script.setAttribute('crossorigin', scriptProp['crossorigin']);
+    get(scriptProp) {
+        let script = document.createElement("script");
+        let source, integrity, crossorigin;
+        if (typeof (scriptProp) === 'object') {
+            source = scriptProp.src;
+            integrity = scriptProp['integrity'] ? scriptProp['integrity'] : null;
+            crossorigin = scriptProp['crossorigin'] ? scriptProp['crossorigin'] : null;
+        } else if (typeof (scriptProp) === 'string') {
+            if (scriptProp.startsWith('./')) {
+                source = scriptProp;
+                integrity = null;
+                crossorigin = null;
+            } else {
+                source = 'https://cdn.jsdelivr.net/gh/xrehpicx/xjs@v' + version + '/src/js/' + scriptProp + '.min.js';
+                integrity = null;
+                crossorigin = null;
+            }
+        }
+        script.src = source;
+        if (integrity !== null) script.integrity = integrity;
+        if (crossorigin !== null) script.setAttribute('crossorigin', scriptProp['crossorigin']);
         document.head.appendChild(script);
+
     };
-    getScripts(scripts) {
+    gets(scripts) {
         scripts.forEach(element => {
-            getScript(element);
+            get(element);
         });
     };
-    removeScript(scriptList) {
+    remove(scriptList) {
         var allScriptTags = document.querySelectorAll('script');
         scriptList.forEach(ele => {
             allScriptTags.forEach(element => {
-                if (ele.src === element.src)
-                    element.parentNode.removeChild(element);
+                if (ele.src === element.src) element.parentNode.removeChild(element);
             });
         })
     }
 }
 
+class xobjs {
+    xjselements = [];
+    clear(elem) {
+        if (!elem) this.xjselements = [];
+        else if (elem.xjs) this.xjselements = this.xjselements.filter(item => item.Selector !== elem.Selector);
+        else if (typeof (elem) === 'string') this.xjselements = this.xjselements.filter(item => item.Selector !== elem);
+    }
+    add(ele) {
+        this.xjselements.push(ele);
+    }
+    i(i) {
+        return this.xjselements[i - 1] ? this.xjselements[i - 1] : 'DNE';
+    }
+}
+var X = new xobjs();
 class xjs {
-    constructor(selector) {
-        if (typeof (selector) === 'string') {
-            this.domnod = document.querySelector(selector);
-        }
-        else if (typeof (selector) === 'object') {
-            this.domnod = selector;
-        }
+    constructor(selector, holdvar) {
+        if (typeof (selector) === 'string') this.domnod = document.querySelector(selector);
+        else if (typeof (selector) === 'object') this.domnod = selector;
+        X.add(this);
+        this.Selector = holdvar;
     }
     get() {
         return this.domnod;
+    }
+    name() {
+        return this.Selector;
     }
     inside(d) {
         this.domnod.innerHTML = d ? d : '';
@@ -44,21 +76,14 @@ class xjs {
         let element = document.createElement(e);
         this.domnod.appendChild(element);
         let exjs = x(element, false);
-        if (re[0] === 'c') {
-            return exjs;
-        } else if (re[0] === 'p') {
-            return this;
-        }
+        if (re[0] === 'c') return exjs;
+        else if (re[0] === 'p') return this;
     }
     fullScreen() {
-        if (this.domnod.requestFullscreen)
-            this.domnod.requestFullscreen();
-        else if (this.domnod.mozRequestFullScreen)
-            this.domnod.mozRequestFullScreen();
-        else if (this.domnod.webkitRequestFullscreen)
-            this.domnod.webkitRequestFullscreen();
-        else if (this.domnod.msRequestFullscreen)
-            this.domnod.msRequestFullscreen();
+        if (this.domnod.requestFullscreen) this.domnod.requestFullscreen();
+        else if (this.domnod.mozRequestFullScreen) this.domnod.mozRequestFullScreen();
+        else if (this.domnod.webkitRequestFullscreen) this.domnod.webkitRequestFullscreen();
+        else if (this.domnod.msRequestFullscreen) this.domnod.msRequestFullscreen();
         return this;
     }
 
@@ -83,7 +108,7 @@ class xjs {
         this.domnod.addEventListener('mouseover', () => fun(this));
         return this;
     }
-    toggle(prop='display', val='none') {
+    toggle(prop = 'display', val = 'none') {
         let styleobj = this.domnod.style;
         let currentval = {};
         if (prop !== undefined || prop !== 'reset' && val !== undefined) {
@@ -137,8 +162,8 @@ function locate(element) {
     }
     return simpleObj;
 }
-function x(selector, orphan = true) {
-    let xjsobj = new xjs(selector);
+function x(selector, holdvar = selector) {
+    let xjsobj = new xjs(selector, holdvar);
     xjsobj.xjs = true;
     return xjsobj;
 }
