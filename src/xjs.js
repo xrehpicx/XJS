@@ -1,4 +1,4 @@
-var version = 1.5;
+var version = 10.1;
 //XJS version Do Not Change This
 class DS {
     get(scriptProp) {
